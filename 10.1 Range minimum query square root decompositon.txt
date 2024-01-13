@@ -36,9 +36,21 @@ query : (2, 8) that is in two block (1,3) & (4,6)
 approach 5 : Sparse table optimization space O(nlogn) time O(1) for each query...
 
 explain : 
-	look[i][j] = minimum of i to 2^j i<n and j<logn ex. look[0][3] = minimum of (0, 7).
+	`look[i][j] = minimum of range i to sizeof(2^j) i.e (i, i+2^(j)-1) : i<n and j<logn
+				 ex. look[0][3] = minimum of (0, 0+2^(3)-1) = (0,7).
+	
+	`look[3][0](look[3][3]) = arr[3] 
+	 therefore /* look[i][0] = arr[i] */ for every i in range n.
+	
+	`look[0][3] (look[0][7]) = min(look[0][2] (look[0][3]) , look[4][2] (look[4][7]))
+	 therefore /* look[i][j] = min(look[i][j-1], look[i+2^(j-1)][j-1]) */; for every (2 << j) <= n and (i + (2 << j) - 1) < n
 
-
+	`In query to ans (L,R) check (startingL size of closest power of 2) and (ending with R of same power of 2)
+	 i.e (2,10) = min((2, 9), (3,10)) , (1,4) = min((1, 4), (1,4))
+	 /* i = L
+	    j = floor(log2(R-L+1))
+		k = R - pow(2, j) + 1
+		Query(L, R) = min(look[i][j], look[k][j]);
 
 
 
