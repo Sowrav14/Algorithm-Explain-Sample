@@ -1,0 +1,154 @@
+*** Longest common subsequence ***
+
+	A = "abcdefghij"
+	B = "cbdgfhij"
+
+answers are = "cdghij" , "cdfhij", "bdghij", "bdfhij" etc;
+so lcs = 6.
+
+Approach:
+	Recursive:
+		- use two pointer(i,j) for two strings
+		- check if they match
+		- if match move both to next idx.
+		- else make choices by moving one of them to next keeping other..
+		- then take the max of both choices...
+
+
+---------------------------------------------------------------------------------------------------
+	string A,B;
+	int lcs(int i, int j){
+    		if(A[i] == '\0' or B[j] == '\0') return 0;
+
+    		if(A[i] == B[j]){
+        		return 1 + lcs(i+1, j+1);
+    		} else {
+        		return max(lcs(i+1, j),  lcs(i, j+1));
+    		}
+	}
+---------------------------------------------------------------------------------------------------
+
+		use memoization here...
+
+---------------------------------------------------------------------------------------------------
+	int dp[1000][1000];
+	// initialize it with -1
+	string A,B;
+	int lcs(int i, int j){
+    		if(A[i] == '\0' or B[j] == '\0') return 0;
+    		if(dp[i][j] != -1) return dp[i][j];
+    		if(A[i] == B[j]){
+        		return dp[i][j] = 1 + lcs(i+1, j+1);
+    		} else {
+        		return dp[i][j] = max(lcs(i+1, j),  lcs(i, j+1));
+    		}
+	}
+---------------------------------------------------------------------------------------------------
+
+		iterative:
+
+---------------------------------------------------------------------------------------------------
+	int dp[1000][1000];
+	int lcs(){
+    		A = "abcdefghij";
+    		B = "cbdgfhij";
+    		int n = A.size();
+    		int m = B.size();
+    
+    		for(int i=1;i<A.size();i++){
+        		for(int j=1;j<B.size();j++){
+            		if(A[i] == B[j]){
+                			dp[i][j] = dp[i-1][j-1] + 1;
+            		} else{
+                			dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
+            		}
+        		}
+    		}
+    		return dp[n-1][m-1];
+	}
+---------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+						*** iterative visualize
+
+A = "bd"
+B = "abcd"
+
+make a 3*5 matrix
+
+
+					a	b	c	d			the sequence will be the characters got from diagonal moves..
+				0	1	2	3	4			[2][4] = 2 got by diagonal move from [1][3] so s += "d"
+											[1][3] = 1 got from previous adjacent [1][2] as they dont match at max is at [1][2]
+			0	0	0	0	0	0			[1][2] = 1 got from diagonal move from [0][1] so s += "b"
+
+		    b	1	0	0	1	1	1			
+
+		    d 2	0	0	1	1	2			therefore common sequence is "bd".
+
+
+[0][j] = [i][0] = 0; for all i,j
+if(char match accoss row and column)
+	[i][j] = 1 + previous diagonal
+else 
+	[i][j] = max(previous adjacents)
+
+
+
+								***
+
+
+* Atcoder solution...
+
+
+---------------------------------------------------------------------------------------------------
+
+#include<bits/stdc++.h>
+using namespace std;
+int dp[3010][3010];
+
+int main(){
+    string s,t; cin >> s >> t;
+    int n = s.size();
+    int m = t.size();
+
+    for(int i=1;i<=n;i++){
+        for(int j=1;j<=m;j++){
+            if(s[i-1] == t[j-1]){
+                dp[i][j] = 1 + dp[i-1][j-1];
+            } else {
+                dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
+            }
+        }
+    }
+    // cout << dp[n][m] << endl;
+    string ans = "";
+    int i = n, j = m;
+    while(i!=0 and j!= 0){
+        if(s[i-1] == t[j-1]){
+            ans += s[i-1];
+            i = i - 1;
+            j = j - 1;
+        } else if(dp[i-1][j] == dp[i][j]){
+            i = i - 1;
+        } else {
+            j = j - 1;
+        }
+    }
+    reverse(ans.begin(),ans.end());
+    cout << ans << endl;
+}
+
+input:
+	abracadabra
+	avadakedavra
+output:
+	aaadara
+
+
+---------------------------------------------------------------------------------------------------

@@ -1,0 +1,65 @@
+Range minuimum query : 
+
+	arr[] = { 2,5,3,8,9}
+	query : (1,3) -- 2
+		(2,5) -- 3
+
+approach 1 : brute force O(n2)
+approach 2 : segment tree build - O(nlogn), query O(logn)
+approach 3 : sparse table build - O(n2), query O(1)
+
+	method : look[i][j] = index of minimum value in range (i,j)
+		 initialize look[i][j] = i for each i belongs to arr[]
+		 look[i][j] = look[i][j-1] if arr[j] > a[look[i][j-1]]
+		 look[i][j] = j else.
+
+approach 4 : optimization of sparse table to O(n * sprt(n))
+
+explain : 
+	a. divide arr[n] into sqrt(n) blocks of size sqrt(n)
+	b. compute minimum for every block. time O(n) space sqrt(n).
+
+
+	arr[] = {7, 2, 3, 0, 5, 10, 3, 12, 18}
+	block(l,r,m)[] = {(1,3,2), (4,6,0), (7,9,3)}
+
+query : (2, 8) that is in two block (1,3) & (4,6)
+	`2 % 3(block_size()) == 2 ans = min(ans, arr[2]) = 2, l = 3
+	`3 % 3 == 0 sum = min(ans, arr[3]) = 2, l = 4
+	`4 % 3 == 1(in starting of a block) and (4 + 3 - 1 <= 8) add this block sum = min(ans, block(4/3=1)) = 0, l = 7
+	` 7 % 3 == 1(starting) and (7 + 3 -1 > 8) can't add this block travarse (7-8) ans = 0.
+
+ it takes 2*sqrt(n) time in worst case...
+
+
+
+approach 5 : Sparse table optimization space O(nlogn) time O(1) for each query...
+
+explain : 
+	look[i][j] = minimum of i to 2^j i<n and j<logn ex. look[0][3] = minimum of (0, 7).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

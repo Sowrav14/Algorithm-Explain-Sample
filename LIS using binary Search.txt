@@ -1,0 +1,92 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define Sowrav_Nath ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+#define f(i,n)              for(int i=0;i<n;i++)
+#define f1(i,n)             for(int i=1;i<=n;i++)
+#define rf(i,n)             for(int i=n-1;i>=0;i--)
+#define rf1(i,n)            for(int i = n;i>=1;i--)
+#define le_debut            signed main
+#define int                 long long int
+#define endl                '\n'
+#define pb                  push_back
+#define oui                 cout << "YES" << endl
+#define non                 cout << "NO" << endl
+#define homme               cout << "Bob" << endl
+#define femme               cout << "Alice" << endl
+#define un_de_minus         cout << "-1" << endl
+#define duck                cout << 0 << endl;
+#define reponse             cout << ans << endl
+#define ici                 cout << "Je suis ici" << endl
+const int N = 1e5+10;
+const int M = 1e9+7;
+
+
+// Inline Function
+inline int bigmod(int x,int y)  {int ret=1; while(y>0)  {if(y&1)    {ret=(ret*x)%M;}    y>>=1;x=(x*x)%M;}   return ret;}
+inline int ad(int x,int y)      {int ret=(x%M+y%M)%M;   if(ret<0)   {ret+=M,ret=ret%M;} return ret;}
+inline int sub(int x,int y)     {int ret=((x%M)-(y%M)+M)%M;    if(ret<0)    {ret+=M,ret=ret%M;} return ret;}
+inline int gun(int x,int y)     {int ret=((x%M)*(y%M))%M;   if(ret<0)   {ret+=M,ret=ret%M;} return ret;}
+
+vector<int>g[N];
+vector<int>v(N);
+vector<int>ans(N);
+vector<int>vis(N);
+vector<int>lis;
+
+void dfs(int vertex){
+    vis[vertex] = 1;
+    int cur, flag;
+    flag = 0;
+    int it = lower_bound(lis.begin(), lis.end(), v[vertex]) - lis.begin();
+    if(it != lis.size()){
+        cur = lis[it];
+        flag = 1;
+        lis[it] = v[vertex];
+
+    } else {
+        lis.pb(v[vertex]);
+    }
+    for(auto child : g[vertex]){
+        if(!vis[child]){
+            dfs(child);
+        }
+    }
+    ans[vertex] = lis.size();
+    if(flag){
+        lis[it] = cur;
+    } else{
+        lis.pop_back();
+    }
+}
+
+
+
+void allons_y(){
+
+    int n; cin >> n;
+    for(int i=2;i<=n;i++){
+        int j; cin >> j;
+        g[i].pb(j);
+        g[j].pb(i);
+    }
+    f1(i,n){
+        int x; cin >> x;
+        v[i] = x;
+    }
+    dfs(1);
+    for(int i=2;i<=n;i++) cout << ans[i] << " "; cout << endl;
+
+}
+
+
+le_debut(){
+    Sowrav_Nath
+    int test = 1;
+    // cin >> test;
+    f1(tc,test){
+        // cout << "Case " << tc << ": ";
+        // memset(dp,0,sizeof(dp));
+        allons_y();
+    }
+}

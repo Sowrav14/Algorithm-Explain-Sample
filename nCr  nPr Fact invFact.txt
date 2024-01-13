@@ -1,0 +1,45 @@
+int f[N],invf[N];
+
+
+// Big Mod
+int A_pow_B(int a,int b){
+    int ret = 1;
+    while(b){
+        if(b&1) {
+            ret = (1ll * ret%M * a%M) % M;
+        }
+        a = (1ll * a%M * a%M) % M;
+        b >>= 1;
+    }
+    return ret;
+}
+
+
+
+// Calculating factorials and inverse factorial
+void fact_invfact(){
+    f[0] = 1;
+    for(int i=1;i<N;i++){
+        f[i] = (1ll * f[i-1]%M * i%M) % M;
+    }
+
+    // calculate fact inverse
+    invf[N-1] = A_pow_B(f[N-1],M-2);
+    for(int i=N-2;i>=0;i--){
+        invf[i] = (1ll * invf[i+1]%M * (i+1)%M) % M;
+    }
+}
+
+
+// Calculating nCr
+int nCr(int n, int r){
+    if(n < 0 or n < r) return 0;
+    return (1ll * f[n]%M * invf[n-r]%M * invf[r]%M) % M ; 
+}
+
+
+// Calculating nPr
+int nPr(int n, int r){
+    if(n < 0 or n < r) return 0;
+    return (1ll * f[n]%M * invf[n-r]%M) % M;
+}

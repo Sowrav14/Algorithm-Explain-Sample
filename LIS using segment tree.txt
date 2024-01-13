@@ -1,0 +1,129 @@
+/**
+ * @file C_Challenging_Hike.cpp
+ * @author Sowrav Nath
+ * @brief                           Lis using Segment Tree
+ *          First sort the array is ascending using pair to keep trace of formal indices
+ *          Iterate(i) over the sorted array with value (val)and traced index(j)
+ *          find max(mx) of lis from indices [0, j-1]
+ *          update in tree for the index j value = mx
+ *          repeat...
+ *          Length of lis = tree[1];
+ * 
+ * @version 0.1
+ * @date 2023-09-28
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
+
+
+
+#include<bits/stdc++.h>
+using namespace std;
+const int N = 1e5+10;
+pair<int,int> a[N];
+#define f1(i,n) for(int i=1;i<=n;i++)
+int n;
+int tree[4*N];
+vector<int>g[N];
+int weight[N];
+int ans[N];
+
+void update(int node, int l, int r, int i, int val){
+    
+    if(i>r or i<l) return;
+    if(l == r){
+        tree[node] = val;
+        return;
+    }
+
+    int mid = (l + r) / 2;
+    update(2*node, l, mid, i, val);
+    update(2*node+1, mid+1, r, i, val);
+    tree[node] = max(tree[2*node], tree[2*node+1]);
+}
+
+int query(int node, int l, int r, int i, int j){
+    if(i>r or j<l) return 0;
+    if(i<=l and j>=r){
+        return tree[node];
+    }
+
+    int mid = (l + r) / 2;
+    int left = query(2*node, l, mid, i, j);
+    int right =query(2*node+1, mid+1, r, i, j);
+    return max(left, right);
+}
+
+
+void dfs(int u, int p){
+    int x = weight[u];
+    // cout << u << " " << x << endl;
+    int mx = query(1, 1, n, 0, x-1);
+    ans[u] = max(ans[p], mx+1);
+    update(1, 1, n, x, mx+1);
+    for(auto v : g[u]){
+        if(v != p) dfs(v, u);
+    }
+    update(1, 1, n, x, 0);
+}
+
+int main(){
+    cin >> n;
+    // In tree
+    for(int i=2;i<=n;i++){
+        int j; cin >> j;
+        g[i].push_back(j);
+        g[j].push_back(i);
+    }
+    
+    map<int,int>mp;
+    f1(i,n){
+        cin >> weight[i];
+        mp[weight[i]]++;
+    }
+    int it = 1;
+    for(auto &i : mp){              // don't need the values
+        i.second = it;              // only trace of index is enough
+        it++;
+    }
+
+    f1(i,n){
+        weight[i] = mp[weight[i]];
+    }
+
+    dfs(1, 0);
+    
+    for(int i=2;i<=n;i++) cout << ans[i] << " "; cout << endl;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // Normal LIS.
+    // f1(i,n){
+    //     int x; cin >> x;
+    //     a[i] = {x, i};
+    // }
+
+    // sort(a+1, a+n+1);
+    
+    // f1(i,n){
+    //     int val = a[i].first;
+    //     int idx = a[i].second;
+
+    //     int mx = query(1, 1, n, 0, idx-1);
+    //     // cout << val << " " << idx << " " << mx << endl;
+    //     update(1, 1, n, idx, mx+1);
+    // }
+
+    // cout << tree[1] << endl;
+
+}

@@ -1,0 +1,96 @@
+
+
+
+int a[N];
+int tree[4*N], prop[4*N];
+
+void build(int node, int l, int r){
+
+    if(l == r){
+        tree[node] = a[l];
+        return;
+    }
+
+    int mid = (l + r) / 2;
+
+    build(2*node, l, mid);
+    build(2*node + 1, mid + 1, r);
+    tree[node] = tree[2*node] + tree[2*node + 1];
+
+}
+
+/* 
+void singleupdate(int node, int l, int r, int i, int val){
+
+    if(l>i or r<i) return;
+    if(l == r){
+        tree[node] = val;
+        return;
+    }
+
+    int mid = (l + r) / 2;
+    singleupdate(2*node, l, mid, i, val);
+    singleupdate(2*node+1, mid+1, r, i, val);
+    tree[node] = tree[2*node] + tree[2*node+1];
+}
+*/
+
+
+
+void rangeupdate(int node, int l, int r, int i, int j, int val){
+    if(i>r or j<l) return;
+    if(i<=l and j>=r){
+        tree[node] += (r - l + 1) * val;
+	prop[node] += val;
+        return;
+    }
+
+
+    int mid = (l + r) / 2;
+    rangeupdate(2*node, l, mid, i, j, val);
+    rangeupdate(2*node+1, mid+1, r, i, j, val);
+    tree[node] = tree[2*node] + tree[2*node+1] + (r - l + 1) * prop[node];
+}
+
+
+int query(int node, int l, int r, int i, int j, int val = 0){
+    if(i>r or j<l){
+        return 0;
+    }
+    if(i<=l and j>=r){
+        return tree[node] + (r - l + 1) * val;
+    }
+
+    int mid = (l + r) / 2;
+    int left = query(2*node, l, mid, i, j, val+prop[node]);
+    int right = query(2*node+1, mid+1, r, i, j, val+prop[node]);
+    return left + right;
+}
+
+
+void print(int n){
+    for(int i=1;i<=4*n;i++){
+        cout << i << " " << tree[i] << endl;
+    } cout << endl;
+}
+
+
+int main(){
+    int n; cin >> n;
+    for(int i=1;i<=n;i++){
+        cin >> a[i];
+    }
+
+    build(1, 1, 10);
+
+    // singleupdate(1, 1, 10, 4, 10);
+    // print(n);
+
+    rangeupdate(1, 1, n, 1, 4, 10);
+    // print(n);
+    rangeupdate(1, 1, n, 1, 2, 20);
+    // print(n);
+
+    cout << query(1, 1, n, 1, 6, 0) << endl;
+
+}
