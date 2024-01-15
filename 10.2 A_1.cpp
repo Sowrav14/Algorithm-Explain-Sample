@@ -23,93 +23,95 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long int 
-
+const int N = 2*1e5+10;
+const int M = 1e6+10;
+const int blk = sqrt(N) + 10;
 
 class query{
     public :
-        int p, l, r;
+        int p, l, r, block;
+        query(){}
         query(int pos, int L, int R){
             p = pos;
             l = L;
             r = R;
         }
 
-        bool operator < (query temp){
-            if(this->l == temp.l){
-                return this->r < temp.r;
-            } else {
-                return this->l < temp.l;
-            }
-        }
+        bool operator < (query cq){        // sort according to block then r
+            if(block != cq.block) return block < cq.block;
+            else return r < cq.r;
+         }
 };
 
-vector<query>q;
-vector<int>v;
-vector<int>results;
+int a[N], res[N];
+int freq[M];
+query q[N];
 
 int main(){
     int n,t; cin >> n >> t;
-    results.resize(t);
-    for(int i=0;i<n;i++){
-        int x; cin >> x;
-        v.push_back(x);
+    for(int i=1;i<=n;i++){
+        cin >> a[i];
     }
 
-    for(int i=0;i<t;i++){
+    for(int i=1;i<=t;i++){
         int x,y; cin >> x >> y;
-        x--; y--;
-        q.push_back(query(i, x, y));
+        q[i] = (query(i, x, y));
     }
 
-    sort(q.begin(), q.end());
+    sort(q+1, q+t+1);
 
-    // for(auto i : q){
-    //     cout << i.l << " " << i.r << endl;
-    // }
-
-    map<int,int>m;
-    int left = q[0].l, right = q[0].r;
-
-    for(int i=left;i<=right;i++){
-        m[v[i]]++;
-    }
+    int prevl = 0, prevr = 0;
     int ans = 0;
-    for(auto i : m) ans += (i.second) * (i.second) * (i.first);
-    results[q[0].p] = ans;
-    // cout << q[0].p << " " << ans << endl;
-    // cout << q[0].l << " " << q[0].r << " " << ans << endl;
+    for(int i=1;i<=t;i++){
+        int curl = q[i].l;
+        int curr = q[i].r;
+        int idx = q[i].p;
+        // cout << curl << " " << curr << " " << prevl << " " << prevr << " " << ans << endl;
 
-    for(int i=1;i<t;i++){
-        int l = q[i].l;
-        int r = q[i].r;
+        while(prevr < curr){            // adding extra from right.
+            ++prevr;
+            int val = a[prevr];
+            int c = freq[val];
+            int red = c * c * val;
+            freq[val]++;
+            int add = freq[val] * freq[val] * val;
+            ans += add - red;
+        }
+        while(curl < prevl){            // adding extra from left.
+            --prevl;
+            int val = a[prevl];
+            int c = freq[val];
+            int red = c * c * val;
+            freq[val]++;
+            int add = freq[val] * freq[val] * val;
+            ans += add - red;
+        }
+        while(prevl < curl){
+            int val = a[prevl];
+            int c = freq[val];
+            int red = c * c * val;
+            freq[val]--;
+            int add = freq[val] * freq[val] * val;
+            ans += add - red;
+            prevl++;
+        }
+        while(prevr > curr){            // removing extra from right.
+            int val = a[prevr];
+            int c = freq[val];
+            int red = c * c * val;
+            freq[val]--;
+            int add = freq[val] * freq[val] * val;
+            ans += add - red;
+            prevr--;
+        }
 
-        while(l > left){
-            m[v[left]]--;
-            left++;
-        }
-        if(r > right){
-            while(r > right){
-                right++;
-                m[v[right]]++;
-            }
-        }
-        if(r < right){
-            while(r < right){
-                m[v[right]]--;
-                right--;
-            }
-        }
-
-        int ans = 0;
-        for(auto val : m){
-            ans += (val.second) * (val.second) * (val.first);
-        }
-        results[q[i].p] = ans;
+        res[idx] = ans;
 
     }
 
-    for(auto i : results){
-        cout << i << endl;
+    for(int i=1;i<=t;i++){
+        cout << res[i] << endl;
     }
+
 
 }
