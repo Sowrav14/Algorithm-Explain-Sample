@@ -1,0 +1,45 @@
+Segment tree - update O(logn), query O(logn)
+Fenwick tree - update O(logn), query O(logn)
+but space in Fenwick tree is O(N) and it is easy to implement...
+
+
+LSB : least set bit..
+    extraction = x & (-x)
+    ex. lsb of 10 (1010) = 1010 & (0110) = (10) = 2(in decimal).
+
+
+view : 
+
+idx     -bin     lsb    partial_sum
+16      -10000   16     a[16]...a[1]
+15      -1111    1      a[15]
+14      -1110    2      a[14]...a[13]
+13      -1101    1      a[13]
+12      -1100    4      a[12]...a[9]
+11      -1011    1      a[11]
+10      -1010    2      a[10]...a[9]
+09      -1001    1      a[9]
+08      -1000    8      a[8]...a[1]
+07      -0111    1      a[7]
+06      -0110    4      a[6]...a[3]
+05      -0101    1      a[5]
+04      -0100    4      a[4]...a[1]
+03      -0011    1      a[3]
+02      -0010    2      a[2]...a[1]
+01      -0001    1      a[1]
+
+single update : 
+        ` update in a[7] += val;
+            BIT[7] += val;         7 + lsb(7) = 8
+            BIT[8] += val;         8 + lsb(8) = 16
+            BIT[16] += val;        16 + lsb(16) = 32 > n end.
+
+query : 
+        ` sum(6, 12) = sum(1, 8) + sum(9, 12) - sum(3, 6) - sum(1, 2) = BIT[8] + BIT[12] - BIT[6] - BIT[2]..
+            return BIT[12] - BIT[1]
+            1. sum += BIT[12]      12 - lsb(12) = 8
+            2. sum += BIT[8]       8 - lsb(8) = 0 end.
+            3. sum -= BIT[6]       6 - lsb(6) = 2
+            4. sum -= BIT[2]       2 - lsb(2) = 0 end.
+
+range update :
