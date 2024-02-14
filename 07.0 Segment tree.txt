@@ -68,13 +68,6 @@ int query(int node, int l, int r, int i, int j, int val = 0){
 }
 
 
-void print(int n){
-    for(int i=1;i<=4*n;i++){
-        cout << i << " " << tree[i] << endl;
-    } cout << endl;
-}
-
-
 int main(){
     int n; cin >> n;
     for(int i=1;i<=n;i++){
