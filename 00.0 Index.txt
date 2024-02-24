@@ -1,0 +1,93 @@
+
+https://blog.shahjalalshohag.com/topic-list/
+
+
+1. STL
+2. Searching and Sorting
+    - Binary Search
+    - Ternary Search
+    - Merge Sort
+3. Greedy
+    - Job sequencing
+    - task scheduling
+    - Kadane
+4. Number Theory
+    - Modular arithmetics
+    - Big number.
+    - divisors
+    - Factors (numbers, sum)
+    - Prime factorization
+    - Sieve
+    - Prime check(O(logn)) (miller-robin algo).
+    - Euler Function
+    - Euclid and Extended Euclid Algorithm
+    - Fermat theorem
+    - Willson theorem
+5. Data Structure
+    - Segment tree(lazy)
+    - Fenwich tree
+    - BST & AVL
+    - Heap
+    - Sqrt tree
+    - MO (sqrt decomposition)
+    - Heavy light decomposition
+    - RMQ
+6. Geometry
+    - Convex Hull
+    - Line sweep
+7. Game Theory
+    - Nim
+    - Grundy
+8. Probability, Combinatorics
+    - Permutation
+    - Combination
+    - Expected Value
+9. Dynamic Programming
+    - Recursion
+    - Backtracking
+    - Iterative dp
+    - Knapsack
+    - LIS
+    - LCS
+    - Bitmask dp
+    - Digit dp
+    - tricks for optimization
+10. String Matching
+    - Prefix Function
+    - KMP
+    - Z-algo
+11. Graph
+    - DFS
+    - BFS (multisource, grid)
+    - Dijkstra
+    - Bellman Ford
+    - Floyd Warshall
+    - Spanning tree
+    - Topological Sort
+    - Tree dp
+    - Bridges
+    - Centroid
+    - Coloring
+    - DSU
+    - Euler tour, path
+    - Flow
+    - LCA
+    - SCC
+    - Bicoloring
+    - Bipartite
+    - Artitculation Points, Bridges
+12. AHO
+13. Automata
+14. FFT
+15. Gauss
+15. monotonic and non-monotonic sequences.
+16. Matrix
+    - Number of ways to traverse in 2D matrix[Catalan Number] ( what if some places are blocked ? Hint : DP)
+    - Matrix exponentiation
+    - solving linear recurrence using matrix exponentiation(like fibonacci)
+17. Bits and Bitset
+    - Bitwise AND, OR, Xor
+    - left, right shift
+    - set bit, msb, lsb
+    - leading, trailing zeroes
+    - Bitmask
