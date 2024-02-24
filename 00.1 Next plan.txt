@@ -1,0 +1,4 @@
+1. Game Theory
+2. Geometry
+3. Expected Value
+4. Sqrt Tree
