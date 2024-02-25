@@ -1,0 +1,1 @@
+{"name":"Local: 13","url":"n:\\Study Materials\\All about CP\\Slippets\\13.01 Digits in factorial.cpp","tests":[{"id":1708870867757,"input":"3\n1\n5\n10","output":"1 1\n3 3\n7 7"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"n:\\Study Materials\\All about CP\\Slippets\\13.01 Digits in factorial.cpp","group":"local","local":true}
