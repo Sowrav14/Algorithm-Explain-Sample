@@ -45,7 +45,7 @@ explain :
 	`look[0][3] (look[0][7]) = min(look[0][2] (look[0][3]) , look[4][2] (look[4][7]))
 	 therefore /* look[i][j] = min(look[i][j-1], look[i+2^(j-1)][j-1]) */; for every (2 << j) <= n and (i + (2 << j) - 1) < n
 
-	`In query to ans (L,R) check (startingL size of closest power of 2) and (ending with R of same power of 2)
+	`In query to ans (L,R) check (starting L size of closest power of 2) and (ending with R of same power of 2)
 	 i.e (2,10) = min((2, 9), (3,10)) , (1,4) = min((1, 4), (1,4))
 	 /* i = L
 	    j = floor(log2(R-L+1))
