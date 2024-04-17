@@ -1,0 +1,1 @@
+{"name":"Local: 07","url":"n:\\Study Materials\\All about CP\\Slippets\\07.02 K_th_Number.cpp","tests":[{"id":1713331446867,"input":"7 3\n1 5 2 6 3 7 4\n2 5 3\n4 4 1\n1 7 3","output":"5\n6\n3"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"n:\\Study Materials\\All about CP\\Slippets\\07.02 K_th_Number.cpp","group":"local","local":true}
