@@ -19,7 +19,9 @@ void dfs(int vertex){
 }
 
 
-int d[N], p[N];                         // distance and parent store.
+// distance and parent store.
+int d[N], p[N];
+// single source bfs.
 void bfs(int source){
     queue<int>q;
     q.push(source);
