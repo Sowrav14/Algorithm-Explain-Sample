@@ -1,1 +1,0 @@
-{"name":"Local: 07","url":"n:\\Study Materials\\All about CP\\Slippets\\07.01 Segment tree.cpp","tests":[{"id":1707915242677,"input":"10\n1 2 3 4 5 6 7 8 9 10\n5\n1 2\n4 9\n1 6\n8 9\n5 5","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"n:\\Study Materials\\All about CP\\Slippets\\07.01 Segment tree.cpp","group":"local","local":true}

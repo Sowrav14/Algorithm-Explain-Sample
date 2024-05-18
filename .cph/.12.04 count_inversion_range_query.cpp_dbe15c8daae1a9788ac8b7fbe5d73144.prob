@@ -1,1 +1,0 @@
-{"name":"Local: 12","url":"n:\\Study Materials\\All about CP\\Slippets\\12.04 count_inversion_range_query.cpp","tests":[{"id":1706024742955,"input":"5 3\n1 4 2 3 1\n1 2\n3 5\n1 5","output":"0\n2\n5"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"n:\\Study Materials\\All about CP\\Slippets\\12.04 count_inversion_range_query.cpp","group":"local","local":true}
