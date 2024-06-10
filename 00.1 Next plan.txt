@@ -1,4 +1,10 @@
-1. Game Theory
-2. Geometry
-3. Expected Value
-4. Sqrt Tree
+1. Graph - Tree
+2. Line sweep
+3. Closest pair of Points
+4. Convex Hull
+5. Dijkstra
+6. Bellman Ford
+7. Floyd Warshall
+8. DSU
+9. MST
+10. 2D Segment tree.
