@@ -3,6 +3,7 @@ using namespace std;
 #define int long long int
 #define Fast_IO() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 
+
 // Disjoint Set Union
 struct DSU {
     // parent of each node, rank & size of connected components.
@@ -49,17 +50,39 @@ struct DSU {
 };
 
 
+
 void solve(){
 
     int n,m; cin >> n >> m;
-    DSU dsu = DSU(n);
-
-    for(int i=1;i<=m;i++){
-        int u,v; cin >> u >> v;
-        dsu.merge(u, v);
-        cout << dsu.cc_count().first << " " << dsu.cc_count().second << endl;
+    vector<array<int, 3>>edges;
+    for(int i=0;i<m;i++){
+        int u,v,w; cin >> u >> v >> w;
+        edges.push_back({w, u, v});
     }
+    sort(edges.begin(), edges.end());
+    
+    DSU dsu(n);
+    int mst = 0;
+    for(auto &e : edges){
+        int u = e[1];
+        int v = e[2];
+        int w = e[0];
 
+        // check if both are in different components or not.
+        if(dsu.same(u, v)){
+            continue;
+        } else{
+            dsu.merge(u, v);
+            mst += w;
+        }
+    }
+    int cc = dsu.cc_count().first;
+    int mx = dsu.cc_count().second;
+    // check if tree formation is valid or not...
+    if(cc == 1 and mx == n)
+        cout << mst << endl; 
+    else
+        cout << "IMPOSSIBLE" << endl;
 }
 
 
