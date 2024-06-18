@@ -6,5 +6,5 @@
 6. Bellman Ford
 7. Floyd Warshall
 8. DSU                              -  completed
-9. MST
+9. MST                              -  completed
 10. 2D Segment tree.
