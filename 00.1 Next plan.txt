@@ -1,10 +1,10 @@
 1. Graph - Tree
-2. Line sweep                       - completed
-3. Closest pair of Points           - completed
+2. Line sweep                       -  completed
+3. Closest pair of Points           -  completed
 4. Convex Hull
-5. Dijkstra
-6. Bellman Ford
-7. Floyd Warshall
+5. Dijkstra                         -  completed
+6. Bellman Ford                     -  completed
+7. Floyd Warshall                   -  completed
 8. DSU                              -  completed
 9. MST                              -  completed
 10. 2D Segment tree.
