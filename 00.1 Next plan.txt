@@ -1,6 +1,6 @@
 1. Graph - Tree
-2. Line sweep
-3. Closest pair of Points
+2. Line sweep                       - completed
+3. Closest pair of Points           - completed
 4. Convex Hull
 5. Dijkstra
 6. Bellman Ford
