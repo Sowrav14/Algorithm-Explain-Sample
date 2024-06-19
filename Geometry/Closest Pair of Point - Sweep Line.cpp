@@ -7,8 +7,9 @@
  * @problem: Closest Pair of Points
  * @approach: Closest Pair of Point - Line Sweep Algorighms....
  * @explanation: https://www.geeksforgeeks.org/closest-pair-of-points-using-sweep-line-algorithm/
- *              Both algorithm has some failure corner case of CSES problem.
- *              See these how they work in Line Sweep.
+ *              Both (GFG & SS) algorithm has some failure corner case of CSES problem.
+ *              CF algorithms works well on CSES problem so go for it.
+ * 				See these how they work in Line Sweep.
  *              If necessary use Divide and Conquer Method... 
  */
 #include<bits/stdc++.h>
@@ -23,6 +24,7 @@ vector<pair<int,int>>P;
 int dist2(pair<int, int> a, pair<int, int> b) {
 	return 1LL * (a.x - b.x) * (a.x - b.x) + 1LL * (a.y - b.y) * (a.y - b.y);
 }
+// Shahajalal Shohag.
 // return the indices of points whose distance is minimum among all points.
 pair<int,int> closest_pair() {
 	assert(n >= 2);
@@ -46,6 +48,7 @@ pair<int,int> closest_pair() {
 	return ret;
 }
 
+// GFG
 // Return distance(d^2) of closest pair of points.....
 int closestPair() {
 	// Sort them according to their x-coordinates
@@ -78,6 +81,33 @@ int closestPair() {
 	return d;
 }
 
+// Cf Blogs...
+int ClosestPair(vector<pair<int, int>> pts) {
+    int n = pts.size();
+    sort(pts.begin(), pts.end());
+    set<pair<int, int>> s;
+
+    int best_dist = 9e18;
+    int j = 0;
+    for (int i = 0; i < n; ++i) {
+        int d = best_dist;
+        while ((pts[i].first - pts[j].first) * (pts[i].first - pts[j].first) >= d) {
+            s.erase({pts[j].second, pts[j].first});
+            j += 1;
+        }
+
+        auto it1 = s.lower_bound({pts[i].second - d, pts[i].first});
+        auto it2 = s.upper_bound({pts[i].second + d, pts[i].first});
+        
+        for (auto it = it1; it != it2; ++it) {
+            int dx = pts[i].first - it->second;
+            int dy = pts[i].second - it->first;
+            best_dist = min(best_dist, 1LL * dx * dx + 1LL * dy * dy);      
+        } 
+        s.insert({pts[i].second, pts[i].first}); 
+    }
+    return best_dist;
+}
 
 void solve(){
 
@@ -87,9 +117,12 @@ void solve(){
         P.push_back({a, b});
     }
 
-    pair<int,int>id = closest_pair();
-    cout << dist2(P[id.x], P[id.y]);
+    // pair<int,int>id = closest_pair();
+    // cout << dist2(P[id.x], P[id.y]);
 
+	// cout << closestPair() << endl;
+
+	cout << ClosestPair(P) << endl;
 }
 
 
