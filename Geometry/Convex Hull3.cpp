@@ -1,14 +1,15 @@
 /*
- * @file Convex Hull.cpp
+ * @file Convex Hull example.cpp
  * @author Sowrav Nath
  * @version 0.1
  * @date 2024-06-20
  * @copyright Copyright (c) 2024
- * @problem: https://cses.fi/problemset/task/2195
- * @approach: Convex Hull - Graham Scan Algorighms.
- * @explanation: https://cp-algorithms.com/geometry/convex-hull.html
- *              https://www.geeksforgeeks.org/convex-hull-using-graham-scan/
+ * @problem: https://codeforces.com/contest/166/problem/B
+ * @approach: Constructing convex hull (graham scan)
+ * @explanation:
  */
+
+
 #include<bits/stdc++.h>
 using namespace std;
 #define int long long int
@@ -78,17 +79,30 @@ void convex_hull(vector<pt>& a, bool include_collinear = false) {
 void solve(){
 
     int n; cin >> n;
-    vector<pt>a;
+    vector<pt>a,b,c;
     for(int i=0;i<n;i++){
         pt p; cin >> p.x >> p.y;
         a.push_back(p);
+        c.push_back(p);
+    }
+    int m; cin >> m;
+    for(int i=0;i<m;i++){
+        pt p; cin >> p.x >> p.y;
+        b.push_back(p);
+        c.push_back(p);
     }
 
-    convex_hull(a, true);
-    cout << a.size() << endl;
-    for(auto i : a){
-        cout << i.x << " " << i.y << endl;
-    }
+    convex_hull(c, true);
+
+    sort(a.begin(), a.end(), [](pt p1, pt p2){
+        return make_pair(p1.x, p1.y) < make_pair(p2.x, p2.y);
+    });
+    sort(c.begin(), c.end(), [](pt p1, pt p2){
+        return make_pair(p1.x, p1.y) < make_pair(p2.x, p2.y);
+    });
+
+    
+    cout << (a == c ? "YES" : "NO") << endl;
 
 }
 
