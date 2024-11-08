@@ -1,3 +1,13 @@
+/**
+ * @file Trie with String.cpp
+ * @author Sowrav Nath (Sowravnath05102002@gmail.com)
+ * @version 0.1
+ * @date 2024-11-08
+ * @copyright Copyright (c) 2024
+ * @tags: Trie string
+ * @resources: https://www.youtube.com/playlist?list=PLgUwDviBIf0pcIDCZnxhv0LkHf5KzG9zp
+ *             https://www.geeksforgeeks.org/introduction-to-trie-data-structure-and-algorithm-tutorials/
+ */
 #include<bits/stdc++.h>
 using namespace std;
 #define int long long int
