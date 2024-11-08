@@ -1,3 +1,13 @@
+/**
+ * @topic: String Hashing
+ * @author Sowrav Nath (Sowravnath05102002@gmail.com)
+ * @version 0.1
+ * @date 2024-10-31
+ * @copyright Copyright (c) 2024
+ * @resouces:
+ *          - https://cp-algorithms.com/string/string-hashing.html
+ *          - https://cp-algorithms.com/string/rabin-karp.html
+ */
 #include<bits/stdc++.h>
 using namespace std;
 #define int long long int
