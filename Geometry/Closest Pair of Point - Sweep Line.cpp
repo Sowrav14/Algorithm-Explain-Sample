@@ -15,9 +15,9 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define int long long int
+#define Fast_IO() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 #define x first
 #define y second
-#define Fast_IO() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 int n;
 vector<pair<int,int>>P;
 
