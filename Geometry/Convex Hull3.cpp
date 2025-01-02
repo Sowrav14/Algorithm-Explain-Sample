@@ -75,7 +75,7 @@ void convex_hull(vector<pt>& a, bool include_collinear = false) {
 
     a = st;
 }
-
+// given two polygon A and B. return if b is strictly inside A.
 void solve(){
 
     int n; cin >> n;
