@@ -16,14 +16,7 @@ using namespace std;
 #define rf1(i,n)            for(int i=n;i>=1;i--)
 #define endl                '\n'
 #define pb                  push_back
-#define oui                 cout << "YES" << endl
-#define non                 cout << "NO" << endl
-#define homme               cout << "Bob" << endl
-#define femme               cout << "Alice" << endl
-#define un_de_minus         cout << "-1" << endl
-#define duck                cout << 0 << endl;
-#define reponse             cout << ans << endl
-#define ici                 cout << "Je suis ici" << endl
+#define ici(x)              cout << "Here : " << x << endl
 
 // Global Variables...
 const int N = 2*1e5+10;
